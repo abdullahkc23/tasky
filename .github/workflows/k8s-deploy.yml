@@ -38,3 +38,4 @@ jobs:
           kubectl apply -f k8s/serviceaccount.yaml
           kubectl apply -f k8s/deployment.yaml
           kubectl apply -f k8s/service.yaml
+#trigger apply
