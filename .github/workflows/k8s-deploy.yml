@@ -34,3 +34,7 @@ jobs:
           aws eks update-kubeconfig --region us-east-2 --name wiz-eks-cluster-v5
 
       - name: Deploy Tasky manifests to EKS
+        run: |
+          kubectl apply -f k8s/serviceaccount.yaml
+          kubectl apply -f k8s/deployment.yaml
+          kubectl apply -f k8s/service.yaml
