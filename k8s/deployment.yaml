@@ -19,7 +19,7 @@ spec:
         - name: tasky
           image: 982081089534.dkr.ecr.us-east-2.amazonaws.com/tasky:latest
           ports:
-            - containerPort: 3000
+            - containerPort: 8080
           env:
             - name: MONGO_URI
               value: "mongodb://3.143.247.169:27017"
