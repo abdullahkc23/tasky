@@ -24,12 +24,13 @@ jobs:
           aws-region: us-east-2
 
       - name: Install kubectl
-        uses: aws-actions/setup-kubectl@v2
+        uses: aws-actions/amazon-eks-setup-kubectl@v1
         with:
-          version: '1.29'
+          kubectl-version: '1.29'
 
       - name: Update kubeconfig
-        run: aws eks update-kubeconfig --region us-east-2 --name wiz-eks-cluster-v5
+        run: |
+          aws eks update-kubeconfig --region us-east-2 --name wiz-eks-cluster-v5
 
       - name: Deploy Tasky to EKS
         run: |
