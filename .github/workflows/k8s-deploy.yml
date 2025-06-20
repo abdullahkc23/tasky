@@ -29,7 +29,7 @@ jobs:
           sudo mv ./kubectl /usr/local/bin/
 
       - name: Update kubeconfig
-        run: aws eks update-kubeconfig --region us-east-2 --name wiz-eks-cluster
+        run: aws eks update-kubeconfig --region us-east-2 --name wiz-eks-cluster-v5
 
       - name: Deploy Tasky to EKS
         run: |
