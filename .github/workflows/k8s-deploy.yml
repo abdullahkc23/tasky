@@ -23,15 +23,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-2
 
-      - name: Install kubectl (via AWS CLI)
-        run: |
-          sudo apt-get update && sudo apt-get install -y unzip curl
-          curl "https://s3.us-west-2.amazonaws.com/amazon-eks/1.29.0/2024-03-27/bin/linux/amd64/kubectl" -o kubectl
-          chmod +x ./kubectl
-          sudo mv ./kubectl /usr/local/bin/
-          kubectl version --client
-
-
+      - name: Install kubectl
+        uses: aws-actions/setup-kubectl@v3
+        with:
+          version: '1.29'
 
       - name: Update kubeconfig
         run: aws eks update-kubeconfig --region us-east-2 --name wiz-eks-cluster-v5
