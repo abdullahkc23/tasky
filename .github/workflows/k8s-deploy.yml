@@ -23,11 +23,14 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-2
 
-      - name: Install kubectl
+      - name: Install kubectl (via AWS CLI)
         run: |
-          curl -LO "https://amazon-eks.s3.us-west-2.amazonaws.com/1.29.0/2024-03-27/bin/linux/amd64/kubectl"
-          chmod +x kubectl
-          sudo mv kubectl /usr/local/bin/
+          sudo apt-get update && sudo apt-get install -y unzip curl
+          curl "https://s3.us-west-2.amazonaws.com/amazon-eks/1.29.0/2024-03-27/bin/linux/amd64/kubectl" -o kubectl
+          chmod +x ./kubectl
+          sudo mv ./kubectl /usr/local/bin/
+          kubectl version --client
+
 
 
       - name: Update kubeconfig
