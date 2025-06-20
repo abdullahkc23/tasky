@@ -24,7 +24,7 @@ jobs:
           aws-region: us-east-2
 
       - name: Install kubectl
-        uses: aws-actions/setup-kubectl@v3
+        uses: aws-actions/setup-kubectl@v2
         with:
           version: '1.29'
 
