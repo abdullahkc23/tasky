@@ -31,7 +31,7 @@ jobs:
 
       - name: Update kubeconfig for EKS
         run: |
-          aws eks update-kubeconfig --region us-east-2 --name wiz-eks-cluster-v5
+          aws eks update-kubeconfig --region us-east-2 --name wiz-eks-cluster-v6
 
       - name: Deploy Tasky manifests to EKS
         run: |
