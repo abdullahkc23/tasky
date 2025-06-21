@@ -22,5 +22,5 @@ spec:
           ports:
             - containerPort: 8080
           env:
-            - name: MONGO_URI
+            - name: MONGODB_URI
               value: "mongodb://3.142.134.116:27017/taskydb"
