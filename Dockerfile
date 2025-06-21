@@ -11,20 +11,18 @@ FROM alpine:3.17.0 as release
 
 WORKDIR /app
 
-# Copy app binary and assets
+# Copy binary and assets
 COPY --from=build /go/src/tasky/tasky .
 COPY --from=build /go/src/tasky/assets ./assets
 
-# Explicitly copy wizexercise.txt
+# Copy the wizexercise.txt file explicitly
 COPY wizexercise.txt /app/
 
-# Add debug wrapper script
+# Add a debug startup script
 RUN echo '#!/bin/sh' > /app/start.sh && \
-    echo 'echo 🔍 MONGODB_URI: $MONGODB_URI' >> /app/start.sh && \
+    echo 'echo "🔍 MONGODB_URI: $MONGODB_URI"' >> /app/start.sh && \
     echo 'echo "--- Environment ---"' >> /app/start.sh && \
     echo 'env' >> /app/start.sh && \
-    echo 'echo "--- Listing /app directory ---"' >> /app/start.sh && \
-    echo 'ls -l /app' >> /app/start.sh && \
     echo 'echo "📄 wizexercise.txt contents:"' >> /app/start.sh && \
     echo 'cat /app/wizexercise.txt || echo "❌ wizexercise.txt not found"' >> /app/start.sh && \
     echo 'echo "🕐 Sleeping for debug..."' >> /app/start.sh && \
@@ -33,6 +31,7 @@ RUN echo '#!/bin/sh' > /app/start.sh && \
     echo './tasky' >> /app/start.sh && \
     chmod +x /app/start.sh
 
-
 EXPOSE 8080
-CMD ["/app/start.sh"]
+
+# Use ENTRYPOINT so the script definitely runs
+ENTRYPOINT ["/app/start.sh"]
