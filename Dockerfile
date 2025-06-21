@@ -17,6 +17,7 @@ COPY --from=build /go/src/tasky/assets ./assets
 COPY wizexercise.txt /app/
 
 # Add a debug wrapper script
+# Add a debug wrapper script
 RUN echo '#!/bin/sh' > /app/start.sh && \
     echo 'echo "🔍 MONGODB_URI: $MONGODB_URI"' >> /app/start.sh && \
     echo 'echo "--- Environment ---"' >> /app/start.sh && \
@@ -28,6 +29,7 @@ RUN echo '#!/bin/sh' > /app/start.sh && \
     echo 'echo "🚀 Launching Tasky..."' >> /app/start.sh && \
     echo './tasky' >> /app/start.sh && \
     chmod +x /app/start.sh
+
 
 EXPOSE 8080
 CMD ["/app/start.sh"]
