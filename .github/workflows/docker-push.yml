@@ -24,13 +24,10 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Build Docker image
-        run: |
-          docker build -t tasky .
-
-      - name: Tag image with ECR URI
+      - name: Force no-cache Docker build
         run: |
           IMAGE_URI=${{ steps.login-ecr.outputs.registry }}/tasky:latest
+          docker build --no-cache -t tasky .
           docker tag tasky $IMAGE_URI
 
       - name: Push image to Amazon ECR
