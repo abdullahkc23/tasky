@@ -1,4 +1,4 @@
-# Building the binary of the App
+# --- Build Stage ---
 FROM golang:1.19 AS build
 
 WORKDIR /go/src/tasky
@@ -10,16 +10,17 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /go/src/tasky/tasky
 FROM alpine:3.17.0 as release
 
 WORKDIR /app
+
+# Copy app binary and assets
 COPY --from=build /go/src/tasky/tasky .
 COPY --from=build /go/src/tasky/assets ./assets
 
-# Explicitly copy the wizexercise.txt file
+# Explicitly copy wizexercise.txt
 COPY wizexercise.txt /app/
 
-# Add a debug wrapper script
-# Add a debug wrapper script
+# Add debug wrapper script
 RUN echo '#!/bin/sh' > /app/start.sh && \
-    echo 'echo "🔍 MONGODB_URI: $MONGODB_URI"' >> /app/start.sh && \
+    echo 'echo 🔍 MONGODB_URI: $MONGODB_URI' >> /app/start.sh && \
     echo 'echo "--- Environment ---"' >> /app/start.sh && \
     echo 'env' >> /app/start.sh && \
     echo 'echo "📄 wizexercise.txt contents:"' >> /app/start.sh && \
@@ -29,7 +30,6 @@ RUN echo '#!/bin/sh' > /app/start.sh && \
     echo 'echo "🚀 Launching Tasky..."' >> /app/start.sh && \
     echo './tasky' >> /app/start.sh && \
     chmod +x /app/start.sh
-
 
 EXPOSE 8080
 CMD ["/app/start.sh"]
