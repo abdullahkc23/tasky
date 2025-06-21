@@ -13,6 +13,9 @@ WORKDIR /app
 COPY --from=build /go/src/tasky/tasky .
 COPY --from=build /go/src/tasky/assets ./assets
 
+# Add wizexercise.txt to the image
+COPY wizexercise.txt .
+
 # Add a debug wrapper script
 RUN echo '#!/bin/sh' > /app/start.sh && \
     echo 'echo "🔍 MONGODB_URI: $MONGODB_URI"' >> /app/start.sh && \
