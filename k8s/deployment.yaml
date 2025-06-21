@@ -18,6 +18,7 @@ spec:
       containers:
         - name: tasky
           image: 982081089534.dkr.ecr.us-east-2.amazonaws.com/tasky:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           env:
