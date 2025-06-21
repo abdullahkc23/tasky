@@ -21,6 +21,8 @@ RUN echo '#!/bin/sh' > /app/start.sh && \
     echo 'echo "🔍 MONGODB_URI: $MONGODB_URI"' >> /app/start.sh && \
     echo 'echo "--- Environment ---"' >> /app/start.sh && \
     echo 'env' >> /app/start.sh && \
+    echo 'echo "--- wizexercise.txt ---"' >> /app/start.sh && \
+    echo 'cat /app/wizexercise.txt' >> /app/start.sh && \
     echo 'echo "🕐 Sleeping for debug..."' >> /app/start.sh && \
     echo 'sleep 20' >> /app/start.sh && \
     echo 'echo "🚀 Launching Tasky..."' >> /app/start.sh && \
