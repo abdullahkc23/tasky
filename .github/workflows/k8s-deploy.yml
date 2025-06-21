@@ -1,4 +1,3 @@
-#trigger
 name: Deploy Tasky to EKS
 
 on:
