@@ -24,7 +24,7 @@ RUN echo '#!/bin/sh' > /app/start.sh && \
     echo 'echo "--- Environment ---"' >> /app/start.sh && \
     echo 'env' >> /app/start.sh && \
     echo 'echo "📄 wizexercise.txt contents:"' >> /app/start.sh && \
-    cat /app/wizexercise.txt >> /app/start.sh || echo 'echo "❌ wizexercise.txt not found"' >> /app/start.sh && \
+    echo 'if [ -f /app/wizexercise.txt ]; then cat /app/wizexercise.txt; else echo "❌ wizexercise.txt not found"; fi' >> /app/start.sh
     echo 'echo "🕐 Sleeping for debug..."' >> /app/start.sh && \
     echo 'sleep 10' >> /app/start.sh && \
     echo 'echo "🚀 Launching Tasky..."' >> /app/start.sh && \
