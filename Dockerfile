@@ -13,7 +13,7 @@ WORKDIR /app
 COPY --from=build  /go/src/tasky/tasky .
 COPY --from=build  /go/src/tasky/assets ./assets
 EXPOSE 8080
-CMD echo "MONGO_URI is: $MONGO_URI" && ./tasky
+CMD [ "sh", "-c", "echo ENV DUMP BELOW && env && sleep 300" ]
 CMD ["/app/tasky"]
 
 
