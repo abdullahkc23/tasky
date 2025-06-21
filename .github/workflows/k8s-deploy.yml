@@ -50,4 +50,4 @@ jobs:
           POD=$(kubectl get pods -l app=tasky -o jsonpath="{.items[0].metadata.name}")
           kubectl logs $POD
 
-#trigger apply again
+#trigger apply
