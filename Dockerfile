@@ -15,7 +15,7 @@ COPY --from=build /go/src/tasky/assets ./assets
 
 # Add a debug wrapper script
 RUN echo '#!/bin/sh' > /app/start.sh && \
-    echo 'echo "🔍 MONGO_URI: $MONGO_URI"' >> /app/start.sh && \
+    echo 'echo "🔍 MONGODB_URI: $MONGODB_URI"' >> /app/start.sh && \
     echo 'echo "--- Environment ---"' >> /app/start.sh && \
     echo 'env' >> /app/start.sh && \
     echo 'echo "🕐 Sleeping for debug..."' >> /app/start.sh && \
