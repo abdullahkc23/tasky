@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"strings"
 	"time"
 
 	"github.com/joho/godotenv"
@@ -17,28 +16,19 @@ var Client *mongo.Client = CreateMongoClient()
 
 func CreateMongoClient() *mongo.Client {
 	godotenv.Overload()
-
-	// Use MONGO_URI instead of MONGODB_URI
-	MongoDbURI := strings.TrimSpace(os.Getenv("MONGO_URI"))
-
-	if MongoDbURI == "" {
-		log.Fatal("❌ MONGO_URI environment variable is not set")
-	}
-
+	MongoDbURI := os.Getenv("MONGODB_URI")
 	client, err := mongo.NewClient(options.Client().ApplyURI(MongoDbURI))
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
-
+	var ctx, cancel = context.WithTimeout(context.Background(), 10*time.Second)
 	err = client.Connect(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	fmt.Println("✅ Connected to MongoDB at:", MongoDbURI)
+	defer cancel()
+	fmt.Println("Connected to MONGO -> ", MongoDbURI)
 	return client
 }
 
