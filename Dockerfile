@@ -1,4 +1,4 @@
-# --- Build Stage ---
+# --- Build
 FROM golang:1.19 AS build
 
 WORKDIR /go/src/tasky
@@ -15,10 +15,10 @@ WORKDIR /app
 COPY --from=build /go/src/tasky/tasky .
 COPY --from=build /go/src/tasky/assets ./assets
 
-# Copy wizexercise.txt explicitly
+# Copy wizexercise.txt
 COPY wizexercise.txt /app/
 
-# Add a debug startup script
+# debug startup script
 RUN echo '#!/bin/sh' > /app/start.sh && \
     echo 'echo "MONGODB_URI: $MONGODB_URI"' >> /app/start.sh && \
     echo 'echo "--- Environment ---"' >> /app/start.sh && \
